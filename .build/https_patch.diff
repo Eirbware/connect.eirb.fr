@@ -1,0 +1,4 @@
+41c41
+<             .queryParam(PROVIDER_PARAMETER_SERVICE, uriInfo.getAbsolutePath().toString());
+---
+>             .queryParam(PROVIDER_PARAMETER_SERVICE, uriInfo.getAbsolutePath().toString().replace("http://", "https://"));

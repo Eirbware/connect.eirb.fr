@@ -1,0 +1,58 @@
+# documentations :
+#    KC: 
+#      * https://www.keycloak.org/server/configuration-production
+#      * https://www.keycloak.org/server/all-config
+#      * https://www.keycloak.org/server/hostname
+#      * https://www.keycloak.org/server/db
+#    PG:
+#      * https://hub.docker.com/_/postgres
+---
+services:
+  connect:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: connect
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:8080:8080
+    volumes:
+      - "./keycloak/providers:/opt/keycloak/providers"
+    environment:
+      - "KC_BOOTSTRAP_ADMIN_USERNAME=admin"
+      - "KC_BOOTSTRAP_ADMIN_PASSWORD=KC_PASS"
+      - "KC_LOG_LEVEL=INFO"
+    command:
+      - "start-dev"  # Start in dev mode
+      - "--db"
+      - "postgres"
+      - "--db-username"
+      - "KC_DB_USER"
+      - "--db-password"
+      - "KC_DB_PASS"
+      - "--db-url"
+      - "jdbc:postgresql://connect-postgres:5432/connect-db"  # https://jdbc.postgresql.org/documentation/use/
+      - "--http-port"
+      - "8080"
+      - "--log"
+      - "file"
+      - "--log-file-level"
+      - "info"
+      - "--http-enabled"  # Required in prod mode, default in https only
+      - "true"
+    deploy:
+      resources:
+        limits:
+          memory: 2G  # To prevent java from miam miam the ram
+
+  connect-postgres:
+    image: postgres:latest
+    container_name: connect-postgres
+    restart: unless-stopped
+    # set shared memory limit when using docker-compose
+    shm_size: 512mb
+    environment:
+      - "POSTGRES_USER=KC_DB_USER"
+      - "POSTGRES_PASSWORD=KC_DB_PASS"
+      - "POSTGRES_DB=connect-db"
+      - "PGDATA=/data"
+    volumes:
+      - "./postgres:/data"
