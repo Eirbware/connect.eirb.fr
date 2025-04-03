@@ -7,6 +7,12 @@ build: keycloak/providers/cas-provider.jar
 keycloak/providers/cas-provider.jar:
 	./build.sh
 
+login-theme:
+	docker compose down
+	jar cf eirbwareTheme.jar -C src/eirbwareTheme .
+	mv eirbwareTheme.jar keycloak/providers/
+	docker compose up -d
+
 .PHONY: dev
 dev: build
 	docker compose up -d
