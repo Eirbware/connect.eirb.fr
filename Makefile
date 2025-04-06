@@ -2,20 +2,17 @@
 all: build
 
 .PHONY: build
-build: keycloak/providers/cas-provider.jar
+build: keycloak/providers/cas-provider.jar keycloak/providers/eirbwareTheme.jar
 
 keycloak/providers/cas-provider.jar:
 	./build.sh
 
-login-theme:
-	docker compose down
-	jar cf eirbwareTheme.jar -C src/eirbwareTheme .
-	mv eirbwareTheme.jar keycloak/providers/
-	docker compose up -d
+keycloak/providers/eirbwareTheme.jar: $(wildcard src/eirbwareTheme/* src/eirbwareTheme/**/*)
+	jar cf $@ -C src/eirbwareTheme .
 
 .PHONY: dev
 dev: build
-	docker compose up -d
+	docker compose up --force-recreate -d
 
 .PHONY: clean
 clean:

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>${msg("Keycloak",(realm.displayName!''))}</title>
+    <title>${msg("EirbConnect",(realm.displayName!''))}</title>
     <link rel="icon" href="${url.resourcesPath}/img/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="${url.resourcesPath}/css/style.css">
     
@@ -19,8 +19,8 @@
     <div class="header">
 
       <div class="header__logo" onclick="window.location.href='/'">
-        <img src="${url.resourcesPath}/img/keycloak.svg" alt="Keycloak logo">
-        <h1>Keycloak</h1>
+        <img src="${url.resourcesPath}/img/EirbConnectLogo.svg" alt="EirbConnect logo">
+        <h1>EirbConnect</h1>
       </div>
 
 
@@ -46,12 +46,15 @@
               </p>
             </div>
 
-            <button onclick="window.location.href='/api/cas_login?service_url=?{service_url}'" class="btn-cas">
-              <img src="${url.resourcesPath}/img/bordeaux_inp_white.svg" alt="bx_inp_logo" class="logo">
-              <p>
-                S'identifier avec <br>le <b>CAS</b>
-              </p>
-            </button>
+          <#list social.providers as p>
+              <button id="social-cas" onclick="window.location.href='${p.loginUrl}'" class="btn-cas">
+                <img src="${url.resourcesPath}/img/bordeaux_inp_white.svg" alt="bx_inp_logo" class="logo">
+                <p>
+                  S'identifier avec <br>le <b>CAS</b>
+                </p>
+              </button>
+            </#list>
+          
           </div>
 
           <hr class="hr-text" data-content="ou">
