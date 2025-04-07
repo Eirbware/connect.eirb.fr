@@ -80,18 +80,7 @@
 			  
 			  <button type="submit" class="btn-full">Se connecter</button>
 			  </div>
-			  
-			  <hr>
-			  <div class="form-group">
-
-            <h1>Vous n’avez pas de compte ?</h1>
-
-            <a href="/register">
-              <button type="button" class="btn-outlined btn-full">
-                Créer un compte
-              </button>
-            </a>
-          </div>
+			
 
 	</form>
 
