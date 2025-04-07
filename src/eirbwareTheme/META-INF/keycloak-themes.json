@@ -1,0 +1,6 @@
+{
+    "themes": [{
+        "name" : "eirbwareTheme",
+        "types": [ "login" ]
+    }]
+}

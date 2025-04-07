@@ -23,3 +23,11 @@ make dev
 docker compose up -d
 ```
 
+### Changer la page/template du login
+
+Tous les sources du template personnalisé sont dans src/eirbwareTheme/ ...
+Pour recharger le template après modification dans ces fichiers :
+
+```sh
+make login-theme
+``
