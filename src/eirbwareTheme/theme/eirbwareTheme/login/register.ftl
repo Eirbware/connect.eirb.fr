@@ -29,7 +29,7 @@
 
     <div class="form-container">
 
-    <form method="POST" action="${url.registerAction}" class="form">
+    <form method="POST" action="${url.registrationAction}" class="form">
 
 
         <h1 class="form-title">Créer un compte EirbConnect</h1>
@@ -56,7 +56,24 @@
             </div>
 
 
-            <button type="submit" class="btn-full">Créer un compte</button>
+            
+            <#if recaptchaRequired?? && !(recaptchaVisible!false)>
+                    <script>
+                        function onSubmitRecaptcha(token) {
+                            document.getElementById("kc-register-form").requestSubmit();
+                        }
+                    </script>
+                    <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
+                        <button class="btn-full" 
+                            data-sitekey="${recaptchaSiteKey}" data-callback='onSubmitRecaptcha' data-action='${recaptchaAction}' type="submit">
+                            ${msg("doRegister")}
+                        </button>
+                    </div>
+                <#else>
+                    <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
+                        <input class="btn-full" type="submit" value="${msg("doRegister")}"/>
+                    </div>
+                </#if>
         </div>
 
 

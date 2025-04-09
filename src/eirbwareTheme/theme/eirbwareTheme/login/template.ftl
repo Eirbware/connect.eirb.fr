@@ -1,4 +1,6 @@
-<#macro registrationLayout>
+<#import "footer.ftl" as loginFooter>
+
+<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -17,13 +19,16 @@
   </head>
 
   <body>
-    <#include "header">
+  <div>
 
-    <div class="content">
-      <#nested>
-    </div
+    <div id="kc-content">
+      <div id="kc-content-wrapper">
+        <#nested "form">
+      </div>
+    </div>
 
-    <#include "footer">
+    <@loginFooter.content/>
+  </div>
   </body>
 
 </html>

@@ -1,3 +1,4 @@
+<#macro content>
 <div class="footer">
       <div class="logo">
         <img src="https://assos.eirb.fr/logos/x256/eirbware.png" />
@@ -17,3 +18,4 @@
         </div>
     </div>
 </div>
+</#macro>
