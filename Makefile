@@ -7,7 +7,7 @@ build: keycloak/providers/cas-provider.jar keycloak/providers/eirbwareTheme.jar
 keycloak/providers/cas-provider.jar:
 	./build.sh
 
-keycloak/providers/eirbwareTheme.jar: $(wildcard src/eirbwareTheme/* src/eirbwareTheme/**/*)
+keycloak/providers/eirbwareTheme.jar: $(shell find src -type f)
 	jar cf $@ -C src/eirbwareTheme .
 
 .PHONY: dev
