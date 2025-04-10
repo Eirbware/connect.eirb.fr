@@ -2,13 +2,15 @@
 all: build
 
 .PHONY: build
-build: keycloak/providers/cas-provider.jar keycloak/providers/eirbwareTheme.jar
+build: keycloak/providers/eirbwareTheme.jar
 
 keycloak/providers/cas-provider.jar:
 	./build.sh
 
 keycloak/providers/eirbwareTheme.jar: $(shell find src -type f)
+	mv $@ $@.tmp
 	jar cf $@ -C src/eirbwareTheme .
+	rm $@.tmp
 
 .PHONY: dev
 dev: build
