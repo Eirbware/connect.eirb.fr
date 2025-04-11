@@ -2,6 +2,7 @@
 from keycloak import KeycloakAdmin
 from keycloak import KeycloakOpenIDConnection
 import argparse
+import json
 
 defaultConfig = {
         "server_url": "https://example.com",
@@ -11,6 +12,7 @@ defaultConfig = {
         "client_secret_key": "<secret>",
         "realm_name": "eirb",
 }
+
 
 def setup_keycloakadmin(config=defaultConfig):
     keycloak_connection = KeycloakOpenIDConnection(
@@ -58,8 +60,6 @@ if __name__ == "__main__":
             "authorizationServicesEnabled": True,
     }
 
-    clientid = keycloak_admin.create_client(new_client, skip_exists=True)
-    print(f"new clientid  : ${clientid}")
-
-
-
+    client_id = keycloak_admin.create_client(new_client, skip_exists=True)
+    secrets = keycloak_admin.get_client_secrets(client_id)
+    print(f'{json.dumps(secrets)}')
