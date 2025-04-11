@@ -201,7 +201,6 @@ input {
     box-shadow: inset 0 -2px 0 0 var(--border-plain-grey);
     color: var(--text-default-grey);
     font-size: 1rem;
-    outline: 0;
     border: 0;
     line-height: 1.5rem;
     padding: 0.5rem 1rem;
@@ -219,7 +218,7 @@ input[type="password"]:focus-visible {
     box-shadow: inset 0 -2px 0 0 var(--background-main-hover);
 }
 
-button, input[type=submit] {
+button, input[type=submit], .password-toggle {
     color: var(--text-inverted);
     background-color: var(--background-main);
     font-size: 1rem;
