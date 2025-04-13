@@ -23,6 +23,12 @@ dev: build
 
 .PHONY: clean
 clean:
+	docker compose down
+
+.PHONY: mrproper
+mrproper:
 	${RM} -r .build/keycloak-cas-main .build/keycloak-cas-main.zip .build/keycloak-cas-target
 	docker compose down
+	docker rm -f connect-build-dep-container || true
+	docker rmi -f connect-build-dep || true
 	sudo ${RM} -r keycloak/providers/cas-provider.jar postgres
