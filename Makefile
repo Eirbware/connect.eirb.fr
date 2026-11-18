@@ -8,9 +8,9 @@ keycloak/providers/cas-provider.jar:
 	./build.sh
 
 keycloak/providers/eirbwareTheme.jar: $(shell find src -type f)
-	mv $@ $@.tmp
+	mv $@ $@.tmp || true
 	jar cf $@ -C src/eirbwareTheme .
-	rm $@.tmp
+	rm -f $@.tmp
 
 PHONY += shell-connect
 shell-connect:
